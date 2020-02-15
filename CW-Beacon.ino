@@ -26,7 +26,6 @@ long int r1       = 0x08001f41;
 long int r2       = 0x18004e42;
 long int r3       = 0x000004B3;
 long int r4       = 0x0015003c;
-long int r4_rfoff = 0x0015001c;
 long int r5       = 0x00580005;
 
 
@@ -50,6 +49,7 @@ long int r5       = 0x00580005;
 
 #define N_MORSE  (sizeof(morsetab)/sizeof(morsetab[0]))
 
+long int reg_mask = 0xffffffdf;
 int dotlen;
 int dashlen;
 char *str;
@@ -236,7 +236,7 @@ void set_freq_on() {
 }
 
 void set_freq_off() {                 
-  ADF4351_Frequenz( r4_rfoff );  // Reg 4
+  ADF4351_Frequenz( r4 & reg_mask );
 }
 
 
@@ -260,7 +260,7 @@ void setup () {
   delay(10);                      // spend time to relax from that shock#ifdef DEBUG_VIA_SERIAL
   ADF4351_Init();
   delay(500);                     // spend time for his initial work
-              // force evaluation of the jumpers on every hard reset
+
 #ifdef DEBUG_VIA_SERIAL
   Serial.println("Arduino-for-ADF4351 setup ready, start to loop");
   Serial.println("Freq: 1296.410Mhz");
@@ -281,6 +281,6 @@ void loop() {
   set_freq_off();
 
 #ifdef DEBUG_VIA_SERIAL
-Serial.println();
+Serial.println();     //new line after end beacon
 #endif
 }
