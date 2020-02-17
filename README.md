@@ -1,5 +1,7 @@
 # CW-Beacon
 Create a simple cw beacon with adf4351 and Arduino, it's possible generate frequency fron 35Mhz to 4.4Ghz.
+For more information on the device, find the data sheet at the following address.
+https://www.analog.com/en/products/adf4351.html
 
 The software, to communicate with ADF4351, uses a software SPI that allows you to use all the pins on the Arduino board.
 In the source file it is possible to set all the parameters necessary to configure the transmission of the message
