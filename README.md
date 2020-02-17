@@ -35,3 +35,12 @@ An example of low cost cards found on the net.
 ![Board](https://github.com/lucamarche-iz1mlt/CW-Beacon/blob/master/img/ADF435xboard1.png)
 ![Board](https://github.com/lucamarche-iz1mlt/CW-Beacon/blob/master/img/ADF435xboard2.png)
 
+
+Arduino side the pins used are the following. In the code it is possible to move them at will according to the needs.
+
+    ////////////////////////DEFINE AND VARIABLE////////////////////////////////
+    // Label            Arduino pins          Description                                        ADF4351 datasheet page
+    #define CE_Pin      4                     // 2  chip enable, low powers down the chip        (DS7, Pin 4)
+    #define LE_Pin      5                     // 3  load enable, high load register selected     (DS7, Pin 3)
+    #define CLK_Pin     6                     // 4  clock to shift in data                       (DS7, Pin 1)
+    #define DATA_Pin    7                     // 8  Serial Data goes here                        (DS7, Pin 2)
