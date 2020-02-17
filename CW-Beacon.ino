@@ -49,7 +49,6 @@ long int r5       = 0x00580005;
 
 #define N_MORSE  (sizeof(morsetab)/sizeof(morsetab[0]))
 
-long int reg_mask = 0xffffffdf;
 int dotlen;
 int dashlen;
 char *str;
@@ -236,7 +235,7 @@ void set_freq_on() {
 }
 
 void set_freq_off() {                 
-  ADF4351_Frequenz( r4 & reg_mask );
+  ADF4351_Frequenz( r4 & 0xffffffdf );
 }
 
 
