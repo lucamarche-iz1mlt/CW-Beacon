@@ -4,7 +4,14 @@ For more information on the device, find the data sheet at the following address
 https://www.analog.com/en/products/adf4351.html
 
 The software, to communicate with ADF4351, uses a software SPI that allows you to use all the pins on the Arduino board.
-In the source file it is possible to set all the parameters necessary to configure the transmission of the message
+In the source file it is possible to set all the parameters necessary to configure the transmission of the message.
+
+    ////////////////////////DEFINE AND VARIABLE////////////////////////////////
+    // Label            Arduino pins          Description                                        ADF4351 datasheet page
+    #define CE_Pin      4                     // 2  chip enable, low powers down the chip        (DS7, Pin 4)
+    #define LE_Pin      5                     // 3  load enable, high load register selected     (DS7, Pin 3)
+    #define CLK_Pin     6                     // 4  clock to shift in data                       (DS7, Pin 1)
+    #define DATA_Pin    7                     // 8  Serial Data goes here                        (DS7, Pin 2)
 
     //////////////////////////////////SETTING///////////////////////////////////
 
@@ -24,6 +31,7 @@ In the source file it is possible to set all the parameters necessary to configu
     long int r3       = 0x000004B3;
     long int r4       = 0x0015003c;
     long int r5       = 0x00580005;
+    
 
 To configure the frequency it is necessary to enter the values ​​of the registers by hand using the analog device software which you can find at the following link.
 
@@ -37,12 +45,9 @@ An example of low cost cards found on the net.
 ![Board](https://github.com/lucamarche-iz1mlt/CW-Beacon/blob/master/img/ADF435xboard1.png)
 ![Board](https://github.com/lucamarche-iz1mlt/CW-Beacon/blob/master/img/ADF435xboard2.png)
 
-
-Arduino side the pins used are the following. In the code it is possible to move them at will according to the needs.
-
-    ////////////////////////DEFINE AND VARIABLE////////////////////////////////
-    // Label            Arduino pins          Description                                        ADF4351 datasheet page
-    #define CE_Pin      4                     // 2  chip enable, low powers down the chip        (DS7, Pin 4)
-    #define LE_Pin      5                     // 3  load enable, high load register selected     (DS7, Pin 3)
-    #define CLK_Pin     6                     // 4  clock to shift in data                       (DS7, Pin 1)
-    #define DATA_Pin    7                     // 8  Serial Data goes here                        (DS7, Pin 2)
+Recommended hardware:
+-   Arduino Leonardo 3v3. 
+-   Arduino Zero/M0 Pro.
+-   Arduino pro mini 3V3.
+-   Other cards that work at 3v3 compatible with Arduino IDE.
+With cards that work at 5 V it is possible to use them through a level shifter that lower it to 3v3.
