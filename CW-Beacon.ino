@@ -235,7 +235,7 @@ void set_freq_on() {
 }
 
 void set_freq_off() {                 
-  ADF4351_Frequenz( r4 & 0xffffffdf );
+  ADF4351_Frequenz( (r4 & 0xffffffdf) | 0x00000800 );
 }
 
 
