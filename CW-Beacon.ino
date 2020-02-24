@@ -41,11 +41,13 @@ long int r5       = 0x00580005;
 #define CLK_Pin     6                     // 4  clock to shift in data                       (DS7, Pin 1)
 #define DATA_Pin    7                     // 8  Serial Data goes here                        (DS7, Pin 2)
 
+#define PA_EN_pin   13                    // Pin for control external power amplifier
+
 // useful abbreviations
 #define pulseHigh(pin)  {digitalWrite(pin, 1); digitalWrite(pin, 0); }
 #define pulseLow(pin)   {digitalWrite(pin, 0); digitalWrite(pin, 1); }
-#define Led_On          {digitalWrite(Led_Pin, HIGH);}
-#define Led_Off         {digitalWrite(Led_Pin, LOW);}
+#define PA_On           {digitalWrite(PA_EN_pin, HIGH);}
+#define PA_Off          {digitalWrite(PA_EN_pin, LOW);}
 
 #define N_MORSE  (sizeof(morsetab)/sizeof(morsetab[0]))
 
@@ -250,11 +252,12 @@ void setup () {
   dashlen = (3 * (1200 / speed_wpm));
   str = CW_TEXT;
 
-  pinMode(CE_Pin,   OUTPUT);      // chip enable
-  pinMode(LE_Pin,   OUTPUT);      // load enable
-  pinMode(CLK_Pin,  OUTPUT);      // clock
-  pinMode(DATA_Pin, OUTPUT);      // data
- 
+  pinMode(CE_Pin,     OUTPUT);      // chip enable
+  pinMode(LE_Pin,     OUTPUT);      // load enable
+  pinMode(CLK_Pin,    OUTPUT);      // clock
+  pinMode(DATA_Pin,   OUTPUT);      // data
+  pinMode(PA_EN_pin,  OUTPUT);      // Power amplifier
+  
   ADF4351_Reset();
   delay(10);                      // spend time to relax from that shock#ifdef DEBUG_VIA_SERIAL
   ADF4351_Init();
@@ -273,11 +276,13 @@ void setup () {
 void loop() {
 
   delay(tone_off);
+  PA_On;
   sendmsg(str);
   delay(time_pause);
   set_freq_on();
   delay(tone_on);
   set_freq_off();
+  PA_Off;
 
 #ifdef DEBUG_VIA_SERIAL
 Serial.println();     //new line after end beacon
