@@ -22,10 +22,10 @@ unsigned int time_pause   = 500;            //ms pause after beacon text
 // RFstep: 10.000kHz
 // Clock in: 10 MHz Ref.
 long int r0       = 0x00409408;
-long int r1       = 0x08001f41;
-long int r2       = 0x18004e42;
+long int r1       = 0x08009F41;
+long int r2       = 0x62004E42;
 long int r3       = 0x000004B3;
-long int r4       = 0x0015003c;
+long int r4       = 0x009A002C;
 long int r5       = 0x00580005;
 
 
